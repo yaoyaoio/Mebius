@@ -1,0 +1,20 @@
+assets是资产
+common是公共 包含 index 登录 退出
+deploy是salt认证等
+logs是日志
+member 是用户和组
+
+
+
+
+
+
+
+
+
+member ---用户管理
+member ---部门管理----
+centos6.6 完美获取物理机cpu 内存 网卡等信息
+centos7 不能获取网卡信息
+Ubuntu 完美获取物理机cpu 内存 网卡等信息
+
