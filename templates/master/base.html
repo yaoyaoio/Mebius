@@ -1,0 +1,143 @@
+{% load memtags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="utf-8">
+    <title>{% block title %}Mebius-运维管理平台{% endblock %}</title>
+  <link href="/statics/css/base.css" rel="stylesheet">
+  <link href="/statics/css/buttons.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/statics/plugins/sweetalert/sweetalert.css">
+</head>
+<body class="sticky-header">
+<section>
+    <!--左侧菜单开始-->
+    <div class="left-side sticky-left-side">
+        <!--logo开始-->
+        <div class="logo">
+                    <!--正常打开logo开始-->
+            <a href="{% url 'index' %}"><img src="/statics/images/logo1.png" alt=""></a>
+        </div>
+                <!--小logo开始-->
+        <div class="logo-icon text-center">
+            <a href="{% url 'index' %}"><img src="/statics/images/logo_icon1.png" alt=""></a>
+        </div>
+        <!--logo结束-->
+           <!--菜单内容开始-->
+        <div class="left-side-inner">
+            <ul class="nav nav-pills nav-stacked custom-nav">
+                <li class="active"><a href="{% url 'index' %}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+                <li class="menu-list"><a href=""><i class="fa fa-laptop"></i> <span>资产管理</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="{% url 'assetslist' %}">资产列表</a></li>
+                        <li><a href="{% url 'iplist' %}">IP地址池</a></li>
+                        <li><a href="{% url 'netlist' %}">网络设备</a></li>
+                        <li><a href="{% url 'assetsarea' %}">机房管理</a></li>
+                    </ul>
+                </li>
+                <li class="menu-list"><a href=""><i class="fa fa-tasks"></i> <span>配置管理</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="{% url 'salt_key' %}">Salt认证</a></li>
+                        <li><a href="{% url 'batchcmd' %}">批量命令</a></li>
+{#                        <li><a href="{% url 'batchfile' %}">文件分发</a></li>#}
+                        <li><a href="{% url 'remote' %}">服务部署</a></li>
+                    </ul>
+                </li>
+                <li class="menu-list"><a href=""><i class="fa fa-calendar"></i> <span>日志审计</span></a>
+                    <ul class="sub-menu-list">
+{#                        <li><a href="{% url 'loginlogs' %}">用户登录记录</a></li>#}
+                        <li><a href="{% url 'executelogs' %}">用户执行记录</a></li>
+                        <li><a href="{% url 'assetslogs' %}">资产变更记录</a></li>
+                    </ul>
+                </li>
+                <li class="menu-list"><a href=""><i class="fa fa-user"></i> <span>用户管理</span></a>
+                    <ul class="sub-menu-list">
+                        <li><a href="{% url 'group' %}">部门管理</a></li>
+                        <li><a href="{% url 'user' %}">用户列表</a></li>
+                    </ul>
+                </li>
+{#                <li class="menu-list"><a href=""><i class="fa fa-key"></i> <span>权限管理</span></a>#}
+{#                    <ul class="sub-menu-list">#}
+{#                        <li><a href="{% url 'group' %}">用户权限</a></li>#}
+{#                        <li><a href="{% url 'user' %}">部门权限</a></li>#}
+{#                    </ul>#}
+{#                </li>#}
+                <li><a href="/admin/"><i class="fa fa-sign-in"></i> <span>后台管理</span></a></li>
+            </ul>
+            <!--菜单内容结束-->
+        </div>
+    </div>
+    <!-- 左侧菜单结束-->
+    <!-- main content start-->
+    <div class="main-content" >
+        <!--顶部开始-->
+        <div class="header-section">
+            <!--toggle button start-->
+               <!--点击隐藏左侧菜单功能-->
+            <a class="toggle-btn"><i class="fa fa-bars"></i></a>
+            <!--toggle button end-->
+            <!--搜索功能开始-->
+            <form class="searchform" action="#" method="post">
+                <input type="text" class="form-control" name="keyword" placeholder="搜索" />
+            </form>
+            <!--搜索功能结束-->
+            <!--右侧用户功能开始 -->
+            <div class="menu-right" style="">
+                <ul class="notification-menu">
+                    <li>
+                        <img alt="" src="/statics/{{ request.user.userprofile.head_img | cut_url }}" style="width:30px;height:30px;float:left;margin-top:6px;"/>
+                        <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span id="user">{% block username %}{{ request.user.userprofile.name }}{% endblock %}</span>
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
+                            <li><a href="#"><i class="fa fa-user"></i>基本资料</a></li>
+                            <li><a href="#"><i class="fa fa-cog"></i>个人设置</a></li>
+                            <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i>退出登录</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+             <!--右侧用户功能结束 -->
+        </div>
+        <!--顶部结束-->
+        <!-- page heading start-->
+        <div class="page-heading panel">
+            <h3>
+                 {% block main-title %}仪表盘{% endblock %}
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="#">{% block main-father %}Dashboard{% endblock %}</a>
+                </li>
+                <li class="active">{% block main-name %}Dashboard{% endblock %}</li>
+            </ul>
+        </div>
+        <!-- page heading end-->
+        <!--content开始-->
+        {% block content %}
+            <div class="wrapper">
+
+            </div>
+        {% endblock %}
+        <!--尾部开始-->
+        <footer style="position:fixed;border: 1px solid silver;color:black">
+            2016 &copy; Mebius is CMDB  by:LiuYao.
+        </footer>
+        <!--尾部结束-->
+    </div>
+    <!-- main content end-->
+</section>
+<script src="/statics/js/jquery-2.2.3.min.js"></script>
+<script src="/statics/js/bootstrap.min.js"></script>
+<script src="/statics/js/modernizr.min.js"></script>
+ <!--滚动条js-->
+<script src="/statics/js/jquery.nicescroll.js"></script>
+<!--common scripts for all pages-->
+<script src="/statics/js/scripts.js"></script>
+    <script src="/statics/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/statics/plugins/tableexcel/jquery.table2excel.min.js"></script>
+
+{% block assest_js %}
+{% endblock %}
+</body>
+</html>

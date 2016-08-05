@@ -1,0 +1,96 @@
+{% extends 'master/base.html' %}
+{% block main-title %}用户登录记录{% endblock %}
+{% block main-father %}日志审计{% endblock %}
+{% block main-name %}用户登录记录{% endblock %}
+{% block content %}
+<div class="wrapper">
+        <div class="col-sm-12 panel">
+        <div class="ibox float-e-margins" id="all">
+        <div class="ibox-title">
+        <h5>用户登录记录</h5>
+        </div>
+        </div>
+
+                <div class="ibox-content">
+                    <form id="asset_form">
+                        <div class="col-sm-1" style="padding-left: 0">
+                        </div>
+                        <div class="col-sm-7" style="padding-left: 0px">
+                        </div>
+                        <div class="col-sm-4" style="padding-right: 0">
+                             <div class="input-group inline-group">
+                                <input type="text" class="form-control m-b input-sm" id="search_input" name="keyword" value="" placeholder="Search">
+                                <input type="text" style="display: none">
+                                <div class="input-group-btn">
+                                    <button id='search_btn' href="#" type="button" class="btn btn-sm btn-primary search-btn"  onclick="change_info()">
+                                        - 搜索 -
+                                    </button>
+                                    <button type="button" href="#" name="export" class="btn btn-sm btn-success search-btn-excel" onclick="return false">
+                                        - 导出 -
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover " id="editable" name="editable">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">
+                                        <input id="checkall" type="checkbox" class="i-checks" name="checkall" value="checkall" data-editable='false' onclick="check_all('asset_form')">
+                                    </th>
+                                    <th class="text-center">用户</th>
+                                    <th class="text-center">登录时间</th>
+                                    <th class="text-center"> 操作 </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for login in login %}
+                                <tr class="gradeX">
+                                    <td class="text-center" name="id" value="32" data-editable='false'>
+                                        <input name="id" value="{{ login.id }}" type="checkbox" class="i-checks">
+                                    </td>
+                                    <td class="text-center hostname"> <a href="#">{{ group.name }}</a></td>
+                                    <td class="text-center">{{ group.login }}</td>
+                                    <td class="text-center" data-editable='false'>
+{#                                        <a value="#" class="conn btn btn-xs btn-warning">更新</a>#}
+                                        <a href="#" class="btn btn-xs btn-info">编辑</a>
+                                        <a value="#" class="btn btn-xs btn-danger asset_del">删除</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-sm-6">
+{#                                <input type="button" id="asset_del" class="btn btn-danger btn-sm"  name="del_button" value="删除"/>#}
+                                <!--<a value="#" type="button" class="btn btn-sm btn-warning iframe">修改</a>-->
+                                <!--<input type="button" id="exec_cmd" class="btn btn-sm btn-primary"  name="exec_cmd" value="执行命令"/>-->
+                            </div>
+                            <div class="col-sm-6">
+    <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
+        <ul class="pagination" style="margin-top: 0; float: right">
+
+                <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
+                     <a class="page" href="#">Previous</a>
+                </li>
+
+
+
+
+                    <li class="paginate_button active"  aria-controls="editable" tabindex="0"><a class="page" href="?page=1"  title="第1页">1</a></li>
+
+
+
+
+                <li class="paginate_button next disabled" aria-controls="editable" tabindex="0" id="editable_next">
+                    <a class="page" href="#">Next</a>
+                </li>
+
+        </ul>
+    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+</div>
+        </div>
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends 'master/base.html' %}
+{% load memtags %}
+
+{% block main-title %}机房管理{% endblock %}
+{% block main-father %}资产管理{% endblock %}
+{% block main-name %}机房管理{% endblock %}
+{% block content %}
+<div class="wrapper">
+        <div class="col-sm-12 panel">
+        <div class="ibox float-e-margins" id="all">
+        <div class="ibox-title">
+        <h5>机房信息列表</h5>
+        </div>
+        </div>
+
+                <div class="ibox-content">
+                    <form id="asset_form">
+                        <div class="col-sm-1" style="padding-left: 0">
+                            <a href="{% url 'addarea' %}" class="btn btn-sm btn-primary ">添加新机房 </a>
+                        </div>
+
+                        <div class="col-sm-7" style="padding-left: 0px">
+                            <label>
+                                <select name="idc" class="form-control m-b input-sm" onchange="change_info()">
+                                    <option value="">地区</option>
+
+
+                                            <option value="北京"> 北京</option>
+
+
+
+                                            <option value="上海"> 上海</option>
+
+
+
+                                            <option value="公司"> 公司</option>
+
+
+                                </select>
+                            </label>
+                            <label>
+                                <select name="idc" class="form-control m-b input-sm" onchange="change_info()">
+                                    <option value="">运营商</option>
+
+
+                                            <option value="北京"> 北京</option>
+
+
+
+                                            <option value="上海"> 上海</option>
+
+
+
+                                            <option value="公司"> 公司</option>
+
+
+                                </select>
+                            </label>
+                        </div>
+                        <div class="col-sm-4" style="padding-right: 0">
+                             <div class="input-group inline-group">
+                                <input type="text" class="form-control m-b input-sm" id="search_input" name="keyword" value="" placeholder="Search">
+                                <input type="text" style="display: none">
+                                <div class="input-group-btn">
+                                    <button id='search_btn' href="#" type="button" class="btn btn-sm btn-primary search-btn"  onclick="change_info()">
+                                        - 搜索 -
+                                    </button>
+                                    <button type="button" href="#" name="export" class="btn btn-sm btn-success search-btn-excel" onclick="return false">
+                                        - 导出 -
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table table-striped table-bordered table-hover " id="editable" name="editable">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">
+                                        <input id="checkall" type="checkbox" class="i-checks" name="checkall" value="checkall" data-editable='false' onclick="check_all('asset_form')">
+                                    </th>
+                                    <th class="text-center">机房名称</th>
+                                    <th class="text-center" name="ip">运营商 </th>
+                                    <th class="text-center">联系人</th>
+                                    <th class="text-center">电话号</th>
+                                    <th class="text-center">手机号</th>
+                                    <th class="text-center">QQ</th>
+                                    <th class="text-center">带宽</th>
+                                    <th class="text-center">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for idcs in idclist %}
+                                <tr class="gradeX">
+                                    <td class="text-center" name="id" value="32" data-editable='false'>
+                                        <input name="id" value="32" type="checkbox" class="i-checks">
+                                    </td>
+                                    <td class="text-center hostname"> <a href="#">{{ idcs.name }}</a></td>
+                                    <td class="text-center">{{ idcs.operator }}</td>
+                                    <td class="text-center">{{ idcs.contacts }}</td>
+                                    <td class="text-center">{{ idcs.contacts_phone }}</td>
+                                    <td class="text-center">{{ idcs.idc_phone }}</td>
+                                    <td class="text-center">{{ idcs.contacts_qq }}</td>
+                                    <td class="text-center">{{ idcs.bandwidth }}</td>
+                                    <td class="text-center" data-editable='false'>
+                                         <a href="{% url 'roomdetail' idcs.id %}" class="conn btn btn-xs btn-success">详细</a>
+                                        <a href="{% url 'modellist' idcs.id %}" class="conn btn btn-xs btn-warning">模块</a>
+                                        <a href="{% url 'cabinet' idcs.id %}" class="conn btn btn-xs btn-info">机柜</a>
+                                        <a href="{% url 'roomdetail' idcs.id %}" class="conn btn btn-xs btn-danger">资产</a>
+                                        <a href="{% url 'compilesarea' idcs.id %}" class="btn btn-xs btn-primary asset_del">编辑</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                            <div class="col-sm-6">
+                            </div>
+                            <div class="col-sm-6">
+                                        <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
+                                            <ul class="pagination" style="margin-top: 0; float: right">
+                                            {% if idclist.has_previous %}
+                                                    <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
+                                                         <a class="?page={{ idclist.previous_page_number }}" href="#">Previous</a>
+                                                    </li>
+                                            {% endif %}
+                                             {% for page_num in idclist.paginator.page_range %}
+                                                {% gusee_page idclist.number page_num %}
+                                            {% endfor %}
+                                            {% if idclist.has_next %}
+                                                    <li class="paginate_button next disabled" aria-controls="editable" tabindex="0" id="editable_next">
+                                                        <a class="page" href="#">Next</a>
+                                                    </li>
+                                                    {% endif %}
+
+                                            </ul>
+                                        </div>
+                                </div>
+                        </form>
+                    </div>
+
+</div>
+<!--</section>-->
+           <!--/* <div style="width:100%;height:500px;background-color: #1CAF9A"></div>*/-->
+        </div>
+
+
+{% endblock %}
