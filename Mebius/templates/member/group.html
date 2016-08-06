@@ -1,0 +1,148 @@
+{% extends 'master/base.html' %}
+{% load memtags %}
+{% block main-title %}部门管理{% endblock %}
+{% block main-father %}用户管理{% endblock %}
+{% block main-name %}部门管理{% endblock %}
+{% block content %}
+<div class="wrapper">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">部门</h3>
+            </div>
+            <div class="panel-body">
+                <form id="assetform">
+                        <div class="col-sm-8" style="padding-left: 0">
+                            <a href="/member/group/adds/" class="btn btn-sm btn-primary ">添加部门 </a>
+                            <a href="#" name="batchdel" class="btn btn-sm btn-warning ">批量删除 </a>
+                        </div>
+                        <div class="col-sm-4" style="padding-right: 0">
+                             <div class="input-group inline-group">
+                                <input type="text" class="form-control m-b input-sm" id="search_input" name="keyword" value="" placeholder="Search">
+                                <input type="text" style="display: none">
+                                <div class="input-group-btn">
+                                    <button id='search_btn' href="#" type="button" class="btn btn-sm btn-primary search-btn"  onclick="">
+                                        - 搜索 -
+                                    </button>
+                                    <button type="button" href="#" name="export" class="btn btn-sm btn-success search-btn-excel">
+                                        - 导出 -
+                                    </button>
+                                </div>
+                             </div>
+                        </div>
+                        <table class="table col-sm-12 table-bordered"  id="editable" name="editable">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">
+                                        <input id="checkall" type="checkbox" class="i-checks" name="checkall" value="checkall" data-editable='false' onclick="check_all('asset_form')">
+                                    </th>
+                                    <th class="text-center">部门名称</th>
+                                    <th class="text-center">负责人</th>
+                                    <th class="text-center">联系方式</th>
+                                    <th class="text-center">成员数</th>
+                                    <th class="text-center">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for group in grouplist_objs %}
+                                <tr class="gradeX">
+                                    <td class="text-center" name="id" value="{{ group.id }}" data-editable='false'>
+                                        <input name="id" value="{{ group.id }}" type="checkbox" class="i-checks">
+                                    </td>
+                                    <td class="text-center hostname"> <a href="#">{{ group.name }}</a></td>
+                                    <td class="text-center">{{ group.owner }}</td>
+                                    <td class="text-center">{{ group.owner.phone }}</td>
+                                    <td class="text-center">{{ group.userprofile_set.count }}</td>
+                                    <td  class="text-center">
+                                        <a  href="/member/compiles/group/{{ group.id }}/" class="btn btn-xs btn-info">编辑</a>
+                                        <a   name="deletegroup" value="#" class="btn btn-xs btn-danger">删除</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                            <div class="col-sm-6">
+                            </div>
+                            <div class="col-sm-6">
+                                    <div class="dataTables_paginate paging_simple_numbers" id="editable_paginate">
+                                        <ul class="pagination" style="margin-top: 0; float: right">
+                                        {% if grouplist_objs.has_previous %}
+                                                <li class="paginate_button previous disabled" aria-controls="editable" tabindex="0" id="editable_previous">
+                                                     <a class="?page={{ grouplist_objs.previous_page_number }}" href="#">Previous</a>
+                                                </li>
+                                        {% endif %}
+                                         {% for page_num in grouplist_objs.paginator.page_range %}
+                                            {% gusee_page grouplist_objs.number page_num %}
+                                        {% endfor %}
+                                        {% if grouplist_objs.has_next %}
+                                                <li class="paginate_button next disabled" aria-controls="editable" tabindex="0" id="editable_next">
+                                                    <a class="page" href="#">Next</a>
+                                                </li>
+                                                {% endif %}
+                                        </ul>
+                                    </div>
+                            </div>
+                </form>
+            </div>
+        </div>
+</div>
+{% endblock %}
+{% block assest_js %}
+                            <script>
+                            /*全选功能*/
+                    $(document).ready(function() {
+                        $("input[id=checkall]").click(
+                                function () {
+                                    if (this.checked) {
+                                        $("input[type=checkbox]").prop('checked', true)
+                                    } else {
+                                        $("input[type=checkbox]").prop('checked', false)
+                                    }
+                                }
+                        );
+                        $('a[name="deletegroup"]').click(
+                                function () {
+                                    var delgroup = $(this).parent().parent().children("td[name='id']").attr("value");
+                                    swal({
+                                          title: "你确定要删除吗?",
+                                          text: "部门删除后就不能恢复了",
+                                          type: "warning",
+                                          showCancelButton: true,
+                                          confirmButtonColor: "#DD6B55",
+                                          confirmButtonText: "Yes, delete it!",
+                                          closeOnConfirm: false
+                                        },
+                                        function(){
+                                            alert(delgroup);
+                                            $.post("{% url 'deletes' %}", {DeleteId:JSON.stringify(delgroup),DeleteName:JSON.stringify('group')},
+                                                    function(callback){
+                                                    });
+                                            swal("删除!", "部门删除成功", "success");
+
+                                        });
+                                    $(this).parent().parent().remove();
+                                }
+                        );
+                        $('button[name="export"]').click(
+                                function(){
+                                     $('#assetform').table2excel({ // 选择器选择要到处的表格，也就是根据原表格构建的表格
+                                        exclude: ".btn-xs",
+                                        name: "Excel Document Name",
+                                        filename: "部门列表", // 导出的文件名
+                                        fileext: ".xls" // 导出的文件扩展名
+                                        });
+                                }
+                        );
+                            $('a[id="batchdel"]').click(
+                                    function () {
+                                        alert('删除你脑袋删除');
+                                    }
+                            )
+
+                        $('a[name="batchdel"]').click(function () {
+                                swal("谁给你的勇气删除的")
+                        });
+                   });
+{#http://t4t5.github.io/sweetalert/#}
+                            </script>
+
+{% endblock %}

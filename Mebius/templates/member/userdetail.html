@@ -1,0 +1,58 @@
+{% extends 'master/base.html' %}
+{% load memtags %}
+{% block main-title %}用户详细资料{% endblock %}
+{% block main-father %}用户管理{% endblock %}
+{% block main-name %}用户详细资料{% endblock %}
+{% block content %}
+<div class="wrapper">
+<aside class="profile-nav col-lg-3">
+                      <section class="panel">
+                          <div class="user-heading round">
+                              <a href="#">
+                                  <img src="/statics/{{ objuser.head_img | cut_url }}" alt="">
+                              </a>
+                              <h1>{{ objuser.name }}</h1>
+                              <p>{{ objuser.email }}</p>
+                          </div>
+                          <ul class="nav nav-pills nav-stacked">
+                              <li class="active"><a href="profile.html"> <i class="icon-user"></i> Profile</a></li>
+                              <li><a href=""> <i class="icon-calendar"></i> Recent Activity <span class="label label-danger pull-right r-activity">9</span></a></li>
+                              <li><a href=""> <i class="icon-edit"></i> Edit profile</a></li>
+                          </ul>
+                      </section>
+                  </aside>
+                  <aside class="profile-info col-lg-9">
+                      <section class="panel">
+                          <div class="bio-graph-heading">
+                              个人资料
+                          </div>
+                          <div class="panel-body bio-graph-info">
+                              <h1>详细</h1>
+                              <div class="row">
+                                  <div class="bio-row">
+                                      <p><span>用户名</span>{{ objuser.name }}</p>
+                                  </div>
+                                  <div class="bio-row">
+                                      <p><span>登录账户</span>{{ objuser.user }}</p>
+                                  </div>
+                                  <div class="bio-row">
+                                      <p><span>部门 </span>{{ objuser.department}}</p>
+                                  </div>
+                                  <div class="bio-row">
+                                      <p><span>创建时间</span>{{ objuser.create_date }}</p>
+                                  </div>
+                                  <div class="bio-row">
+                                      <p><span>IP:</span>{{ objuser.ip }}</p>
+                                  </div>
+                                  <div class="bio-row">
+                                      <p><span>Email </span>{{ objuser.email }}</p>
+                                  </div>
+                                  <div class="bio-row">
+                                      <p><span>Phone </span>{{ objuser.phone }}</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </section>
+                  </aside>
+</div>
+{% endblock %}

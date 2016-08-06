@@ -1,0 +1,126 @@
+{% extends 'master/base.html' %}
+
+{% block content %}
+
+<div class="wrapper">
+                    <div>
+                        <div class="row state-overview">
+                            <div class="col-md-3 col-xs-12 col-sm-6">
+                                <div class="panel purple">
+                                    <div class="symbol">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <div class="state-value">
+                                        <div class="value">1</div>
+                                        <div class="title">用户数量统计</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-12 col-sm-6">
+                                <div class="panel red">
+                                    <div class="symbol">
+                                        <i class="fa fa-desktop"></i>
+                                    </div>
+                                    <div class="state-value">
+                                        <div class="value">1</div>
+                                        <div class="title">服务器数量统计</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-12 col-sm-6">
+                                <div class="panel blue">
+                                    <div class="symbol">
+                                        <i class="fa fa-warning"></i>
+                                    </div>
+                                    <div class="state-value">
+                                        <div class="value">2</div>
+                                        <div class="title">服务器待上线统计</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-xs-12 col-sm-6">
+                                <div class="panel green">
+                                    <div class="symbol">
+                                        <i class="fa fa-money"></i>
+                                    </div>
+                                    <div class="state-value">
+                                        <div class="value">1</div>
+                                        <div class="title">异常资产数量统计</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="panel panel-default">
+                   <div class="panel-heading">
+                      <h3 class="panel-title">
+                         CPU使用率
+                      </h3>
+                   </div>
+                   <div class="panel-body">
+                        <h2>65%</h2>
+                        <div class="progress progress-mini">
+                            <div style="width: 68%;" class="progress-bar"></div>
+                        </div>
+                        <div class="m-t-sm small">刚刚更新</div>
+                   </div>
+                </div>
+            </div>
+        </div>
+{#            <div class="col-sm-3">#}
+{#                <div class="ibox">#}
+{#                    <div class="ibox-content">#}
+{#                        <h5>内存使用率</h5>#}
+{#                        <h2>50%</h2>#}
+{#                        <div class="progress progress-mini">#}
+{#                            <div style="width: 78%;" class="progress-bar"></div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="m-t-sm small">4:32更新</div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <div class="col-sm-3">#}
+{#                <div class="ibox">#}
+{#                    <div class="ibox-content">#}
+{#                        <h5>硬盘使用率</h5>#}
+{#                        <h2>14%</h2>#}
+{#                        <div class="progress progress-mini">#}
+{#                            <div style="width: 38%;" class="progress-bar progress-bar-danger"></div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="m-t-sm small">4:32更新</div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <div class="col-sm-3">#}
+{#                <div class="ibox">#}
+{#                    <div class="ibox-content">#}
+{#                        <h5>使用率</h5>#}
+{#                        <h2>20%</h2>#}
+{#                        <div class="progress progress-mini">#}
+{#                            <div style="width: 28%;" class="progress-bar progress-bar-danger"></div>#}
+{#                        </div>#}
+{##}
+{#                        <div class="m-t-sm small">4:32更新</div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#            </div>#}
+<script src="/statics/plugins/echarts/echarts.js"></script>
+    <script src="/statics/plugins/sparkline/jquery.sparkline.min.js"></script>
+<div id="main" style="width: 600px;height:400px;"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</div>
+{% endblock %}

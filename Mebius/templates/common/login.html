@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DevOps登录</title>
+    <link href="/statics/css/login.css" rel="stylesheet">
+    <link href="/statics/css/bootstrap.css" rel="stylesheet">
+    <link href="/statics/plugins/font-awesome/css/font-awesome.css" rel="stylesheet">
+</head>
+<body class="login-body">
+    <div class="container">
+        <form class="form-signin" action="" method="post">{% csrf_token %}
+            <div class="form-signin-heading text-center">
+                <h1 class="sign-title">让管理变得更复杂</h1>
+                <img alt="" src="/statics/images/login-logo2.png">
+            </div>
+            <div class="login-wrap">
+                    <input class="form-control" type="text" name='username' autofocus="" placeholder="用户名">
+                    <input class="form-control" type="password" name="password" placeholder="密码">
+                    <button class="btn btn-lg btn-login btn-block" type="submit">
+                    <i class="fa fa-check"></i>
+                    </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

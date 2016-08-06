@@ -1,0 +1,188 @@
+{% extends 'master/base.html' %}
+{% block main-title %}机房详情{% endblock %}
+{% block main-father %}资产管理{% endblock %}
+{% block main-name %}机房详情{% endblock %}
+{% block content %}
+<div class="wrapper ">
+        <div class="col-sm-10">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">机房基本信息</h3>
+                </div>
+                <div class="panel-body ">
+                    <table class="table table-hover table-striped">
+                        <tbody>
+                        <tr class="active">
+                            <th width="200">机房名称:</th>
+                            <td>{{ form.name }}</td>
+                        </tr>
+                         <tr class="success">
+                            <th>机房技术:</th>
+                            <td>{{ form.contacts }}</td>
+                        </tr>
+
+                        <tr  class="warning">
+                            <th>机房电话:</th>
+                            <td>{{ form.idc_phone }}</td>
+
+                        </tr>
+
+                        <tr  class="danger">
+                            <th>联系人电话:</th>
+                            <td>{{ form.contacts_phone }}</td>
+                        </tr>
+                        <tr class="success">
+                            <th>机房技术QQ:</th>
+                            <td>{{ form.contacts_qq }}</td>
+
+                        </tr>
+
+                        <tr  class="warning">
+                            <th>机房地址:</th>
+                            <td>{{ form.idc_addr }}</td>
+
+                        </tr>
+                        <tr>
+                            <th>机房带宽:</th>
+                            <td>{{ form.bandwidth }}</td>
+
+                        </tr>
+                        <tr>
+                            <th>合同:</th>
+                            <td>{{ form.contract }}</td>
+
+                        </tr>
+                        <tr>
+                            <th>运营商:</th>
+                            <td>{{ form.operator }}</td>
+
+                        </tr>
+
+                        <tr>
+                            <th>备注:</th>
+                            <td colspan="3">{{ form.comment }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="col-sm-7"></div>
+                </div>
+            </div>
+        </div>
+<div class="col-sm-10">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">机房模块信息</h3>
+                </div>
+                <div class="panel-body ">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center">模块名称</th>
+                                <th class="text-center" name="ip">机柜数</th>
+                            </tr>
+                            </thead>
+                        <tbody>
+                        {% for mod in form.moudle_set.all %}
+                        <tr class="active">
+                            <td class="text-center">{{ mod.name }}</td>
+                            <td class="text-center">{{ mod.cabinet_set.all.count }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="col-sm-10"></div>
+                </div>
+            </div>
+        </div>
+<div class="col-sm-10">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">机柜信息</h3>
+                </div>
+                <div class="panel-body ">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center">所属模块</th>
+                                <th class="text-center">机柜名称</th>
+                                <th class="text-center" name="ip">服务器数量</th>
+                            </tr>
+                            </thead>
+                        <tbody>
+                        {% for mod in form.moudle_set.all %}
+                        {% for cab in mod.cabinet_set.all %}
+                        <tr class="active">
+                            <td class="text-center">{{ cab.model }}</td>
+                            <td class="text-center">{{ cab.name }}</td>
+                            <td class="text-center">{{ cab.asset_set.all.count }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="col-sm-10"></div>
+                </div>
+            </div>
+</div>
+
+
+
+
+<div class="col-sm-10">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">资产信息</h3>
+                </div>
+                <div class="panel-body ">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th class="text-center">所属机柜</th>
+                                <th class="text-center">主机名</th>
+                                <th class="text-center">IP</th>
+                            </tr>
+                            </thead>
+                        <tbody>
+                        {% for mod in form.moudle_set.all %}
+                        {% for cab in mod.cabinet_set.all %}
+                            {% for asset in cab.asset_set.all %}
+                        <tr class="active">
+                            <td class="text-center">{{ asset.idc}}</td>
+                            <td class="text-center">{{ asset.name }}</td>
+                            <td class="text-center">{{ asset.ip }}</td>
+                        </tr>
+                             {% endfor %}
+                        {% endfor %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="col-sm-10"></div>
+                </div>
+            </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+{% endblock %}

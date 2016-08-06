@@ -1,0 +1,109 @@
+.login-body {
+    background: #65cea7 url("../images/login-bg.jpg") no-repeat fixed 0 0 / cover ;
+    height: 100%;
+    width: 100%;
+}
+body {
+    background: #424f63 none repeat scroll 0 0;
+    color: #7a7676;
+    font-family: "Open Sans",sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    overflow-x: hidden;
+}
+h1, h2, h3, h4, h5 {
+    font-family: 'Open Sans', sans-serif;
+}
+.form-signin {
+    background: #fff none repeat scroll 0 0;
+    border-radius: 5px;
+    margin: 100px auto;
+    max-width: 360px;
+}
+.form-signin .form-signin-heading {
+    color: #fff;
+    margin: 0;
+    padding: 25px 15px;
+    position: relative;
+    text-align: center;
+}
+.text-center {
+    text-align: center;
+}
+.sign-title {
+    color: #fff;
+    font-size: 24px;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    text-transform: uppercase;
+    top: -60px;
+    width: 100%;
+}
+.login-wrap {
+    padding: 20px;
+    position: relative;
+}
+.form-signin .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="text"], .form-signin input[type="password"] {
+    margin-bottom: 15px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border: 1px solid #eaeaec;
+    background: #eaeaec;
+    box-shadow: none;
+    font-size: 12px;
+}
+.form-signin .btn-login {
+    background: #6bc5a4;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: normal;
+    font-family: 'Open Sans', sans-serif;
+    margin: 20px 0 5px;
+    padding: 5px;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+    font-size: 30px;
+}
+
+.form-signin .btn-login:hover {
+    background: #688ac2;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.form-signin p {
+    text-align: left;
+    color: #b6b6b6;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.form-signin a, .form-signin a:hover {
+    color: #6bc5a4;
+}
+
+.form-signin a:hover {
+    text-decoration: underline;
+}
+
+
+.registration {
+    color: #c7c7c7;
+    text-align: center;
+    margin-top: 15px;
+}
